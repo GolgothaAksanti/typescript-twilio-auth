@@ -13,8 +13,18 @@ export class AuthRoute implements IRoute {
   }
 
   private initializeRoutes(): void {
-    this.router.post(`${this.path}/signup`),
+    this.router.post(
+      `${this.path}/signup`,
       asyncHandler(verifyPhoneNumber),
-      asyncHandler(this.authController.signup);
+      asyncHandler(this.authController.signup),
+    );
+    this.router.post(
+      `${this.path}/verify`,
+      asyncHandler(this.authController.verifyUser),
+    );
+    this.router.post(
+      `${this.path}/login`,
+      asyncHandler(this.authController.login),
+    );
   }
 }

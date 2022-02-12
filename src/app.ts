@@ -20,12 +20,16 @@ export class App {
     this.connectDB();
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
+    this.invalidRoute();
   }
 
   private initializeMiddlewares(): void {
     this.app.use(bodyParser.json());
     this.app.use(morgan('dev'));
     this.app.use(cors());
+  }
+
+  private invalidRoute(): void {
     this.app.use('*', (req: Request, res: Response) => {
       return res.status(404).json({
         statusCode: 404,
@@ -40,9 +44,11 @@ export class App {
     });
   }
 
-  private connectDB(): void {
+  private async connectDB(): Promise<void> {
     try {
-      mongoose.connect(`${DATABASE_URL}`).then();
+      await mongoose.connect(`${DATABASE_URL}`).then(() => {
+        console.log('Database connected');
+      });
     } catch (err: any) {
       console.log(err.message);
     }

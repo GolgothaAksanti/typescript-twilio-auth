@@ -5,6 +5,7 @@ export interface IUser extends Document {
   lastname: string;
   phonenumber: string;
   active: boolean;
+  verified: boolean;
   createdAt: Date;
   updatedAt: Date;
 }

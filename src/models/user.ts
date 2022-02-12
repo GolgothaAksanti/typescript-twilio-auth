@@ -6,11 +6,11 @@ const UserSchema: Schema = new Schema({
     type: String,
     required: true,
   },
-  lastName: {
+  lastname: {
     type: String,
     required: true,
   },
-  phoneNumber: {
+  phonenumber: {
     type: String,
     required: true,
   },
